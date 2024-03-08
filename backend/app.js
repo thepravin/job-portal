@@ -13,4 +13,22 @@ app.use(cors({
     credentials:true
 }))
 
+// cookies
+const cookies_parser = require('cookie-parser');
+app.use(cookies_parser());
+
+// url data
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+// file upload
+const fileUpload = require("express-fileupload");
+app.use(
+    fileUpload({
+        useTempFiles:true,
+        tempFileDir:"/tmp/",
+    })
+)
+
+
 module.exports = app;
