@@ -1,0 +1,23 @@
+# Ignore Node.js related files in the root
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Ignore backend Node.js related files
+backend/node_modules/
+backend/.env
+
+# Ignore frontend Node.js related files
+frontend/node_modules/
+frontend/build/
+frontend/.env
+
+# Ignore Visual Studio Code configuration
+.vscode/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore logs
+logs/
+*.log
