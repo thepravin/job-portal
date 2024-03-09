@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
-const jwt = require("jwt");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please provide your phone number"],
   },
   password: {
-    typer: String,
+    type: String,
     required: [true, "Please Provide your Password"],
     minLength: [8, "Password must contain at least 8 characters!"],
     maxLength: [32, "Password cannot exceed 32 characters"],
@@ -43,7 +43,7 @@ userSchema.pre("save", async function (next) {
     next();
   }
 
-  // passowrd modified then
+  // passowrd modified or new user then
   this.password = await bcrypt.hash(this.password, 10);
 });
 
