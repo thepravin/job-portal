@@ -1,5 +1,5 @@
 const catchAsyncError = require("../middlewares/catchAsyncError");
-const ErrorHandler = require("../middlewares/error");
+const {ErrorHandler} = require("../middlewares/error");
 const User = require("../models/user.model");
 
 const register = catchAsyncError(async (req, res, next) => {

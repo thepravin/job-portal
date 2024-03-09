@@ -34,4 +34,4 @@ const errorMiddlerware = (err,req,res,next)=>{
 }
 
 
-module.exports = ErrorHandler
+module.exports = {errorMiddlerware , ErrorHandler}

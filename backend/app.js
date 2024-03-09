@@ -46,7 +46,7 @@ const dbConnection = require("./Database/dbConnection");
 dbConnection();
 
 // Error handler middlerware
-const errorMiddlerware = require("./middlewares/error");
+const {errorMiddlerware} = require("./middlewares/error");
 app.use(errorMiddlerware)
 
 module.exports = app;
