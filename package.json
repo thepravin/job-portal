@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.1",
+    "redux": "^5.0.1",
+    "router-dom": "^2.2.11"
+  }
+}
