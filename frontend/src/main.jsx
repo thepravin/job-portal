@@ -25,16 +25,7 @@ const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-        children: [],
-      },
+      },     
       {
         path: "/job/getall",
         element: <Jobs />,
@@ -64,6 +55,15 @@ const appRouter = createBrowserRouter([
         element: <NotFound />
       }
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+    children: [],
   },
 
 

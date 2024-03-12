@@ -21,3 +21,5 @@ frontend/.env
 # Ignore logs
 logs/
 *.log
+
+dummy.js

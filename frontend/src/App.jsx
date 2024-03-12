@@ -19,7 +19,7 @@ function App() {
   // user api
   const fetchUser = async () => {
     try {
-      const response = await axios.get("", { withCredentials: true });
+      const response = await axios.get("http://localhost:4000/api/v1/user/getuser", { withCredentials: true });
     dispatch(addUser(response.data.user));
     dispatch(setIsAuthorized(true));
     } catch (error) {
