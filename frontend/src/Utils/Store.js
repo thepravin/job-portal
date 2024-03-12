@@ -6,7 +6,7 @@ import userSlice from "./userSlice";
 const store = configureStore({
     reducer:{
         isAuthorized : isAuthorizedSlice,
-        user:userSlice,
+         user:userSlice,
     }
 })
 
