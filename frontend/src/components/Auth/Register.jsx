@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import {toast,ToastContainer} from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAuthorized } from "../../Utils/isAuthorizedSlice";
 import { Link, Navigate } from "react-router-dom";
+// index.js or App.js
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Register = () => {
@@ -13,6 +15,7 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [successMeg,setSuccessMeg] = useState("");
 
   const isAuthorized = useSelector((store) => store.isAuthorized);
   const user = useSelector((store) => store.user);
@@ -30,15 +33,16 @@ const Register = () => {
 
         body: JSON.stringify({ name: name, phone: phone, email: email, role: role, password: password }),
       });
-      console.log(response)
+     
       if (!response.ok) {
-        const errorMessage = await response.json();  
-        alert(errorMessage.message);    
+        const errorMessage = await response.json(); 
+        console.log(errorMessage.message) 
+        toast.warning(errorMessage.message);
         throw new Error(errorMessage.message);
       }
 
       const data = await response.json();
-      toast.success(data.message);
+      setSuccessMeg(data.message);
       setName("");
       setEmail("");
       setPassword("");
@@ -46,16 +50,16 @@ const Register = () => {
       setRole("");
       dispatch(setIsAuthorized(true));
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error);
     }
   };
 
 
 
-
   if (isAuthorized) {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/"} />;
   }
+
 
 
 
@@ -98,7 +102,7 @@ const Register = () => {
                 </div>
 
 
-                <button  className="w-full text-white bg-slate-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-slate-600">Create an account</button>
+                <button type="submit" className="w-full text-white bg-slate-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-slate-600">Create an account</button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Already have an account? <Link to={"/login"} className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
                 </p>
@@ -107,6 +111,7 @@ const Register = () => {
           </div>
         </div >
       </section >
+      <ToastContainer   />
     </>
   )
 }
