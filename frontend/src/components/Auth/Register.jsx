@@ -22,13 +22,22 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("http://localhost:4000/api/v1/user/register",
-        { name, phone, email, role, password }, {
+      const response = await fetch("http://localhost:4000/api/v1/user/register", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
-      })
+
+        body: JSON.stringify({ name: name, phone: phone, email: email, role: role, password: password }),
+      });
+      console.log(response)
+      if (!response.ok) {
+        const errorMessage = await response.json();  
+        alert(errorMessage.message);    
+        throw new Error(errorMessage.message);
+      }
+
+      const data = await response.json();
       toast.success(data.message);
       setName("");
       setEmail("");
@@ -37,13 +46,18 @@ const Register = () => {
       setRole("");
       dispatch(setIsAuthorized(true));
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error.message);
     }
-  }
+  };
+
+
+
 
   if (isAuthorized) {
-    return <Navigate to={"/"} />
+    return <Navigate to={"/login"} />;
   }
+
+
 
   return (
     <>
@@ -56,41 +70,51 @@ const Register = () => {
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 
-              <form className="space-y-4 md:space-y-6" >
+              <form className="space-y-4 md:space-y-6" onSubmit={handleRegister}>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
-                  <input type="text" name="name" value={name} onChange={(e)=> setName(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ABC" required="" />
+                  <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ABC" required="" />
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Role</label>
-                  <input type="text" name="role"className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Employer / Job Seeker" required="" />
+                  <select value={role} onChange={(e) => setRole(e.target.value)}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                    <option value="Employer">Employer</option>
+                    <option value="Job Seeker">Job Seeker</option>
+                  </select>
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Phone</label>
-                  <input type="text" name="phone" value={phone} onChange={(e)=>setPhone(e.target.value)}  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+91 xxxxxxxx" required="" />
+                  <input type="text" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+91 xxxxxxxx" required="" />
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                  <input type="email" name="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
+                  <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
                 </div>
 
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                  <input type="password" name="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
+                  <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                 </div>
 
 
-                <button type="submit" className="w-full text-white bg-slate-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-slate-600">Create an account</button>
+                <button  className="w-full text-white bg-slate-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center hover:bg-slate-600">Create an account</button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Already have an account? <Link to={"/login"} className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
                 </p>
               </form>
             </div>
           </div>
-        </div>
-      </section>
+        </div >
+      </section >
     </>
   )
 }
 
 export default Register
+
+
+
+
+
+
