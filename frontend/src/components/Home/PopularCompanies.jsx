@@ -1,5 +1,5 @@
 
-import { FaMicrosoft, FaApple } from "react-icons/fa";
+import { FaMicrosoft, FaApple, FaGoogle } from "react-icons/fa";
 import { SiTesla } from "react-icons/si";
 
 const PopularCompanies = () => {
@@ -16,7 +16,7 @@ const PopularCompanies = () => {
       title: "Google",
       location: "Tower E Old Madras Road 4th and 5th Floors Bangalore,",
       openPositions: 5,
-      icon: <SiTesla />,
+      icon: <FaGoogle />,
     },
     {
       id: 3,
