@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import "./App.css"
 import Store from "./Utils/Store";
 import NavBar from "./components/Layout/NavBar";
 import Footer from "./components/Layout/Footer";
@@ -9,6 +9,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { setIsAuthorized } from "./Utils/isAuthorizedSlice";
 import { addUser } from "./Utils/userSlice";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const isAuthorized = useSelector((store) => store.isAuthorized);
@@ -36,8 +37,8 @@ function App() {
     <>
       <NavBar />
       <Outlet />
-      <Footer />
-      <Toaster />
+      {/* <Footer /> */}
+     
     </>
   );
 }

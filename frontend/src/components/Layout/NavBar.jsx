@@ -81,7 +81,7 @@ const NavBar = () => {
               textDecoration: 'none',
             }}
           >
-            Job
+          KΛM धंदा
           </Typography>
 
           {/* mobile view menu */}
@@ -142,7 +142,7 @@ const NavBar = () => {
               textDecoration: 'none',
             }}
           >
-            Job
+           KΛM धंदा
           </Typography>
 
 
