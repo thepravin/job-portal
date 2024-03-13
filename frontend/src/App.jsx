@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import "./App.css";
+
 import Store from "./Utils/Store";
 import NavBar from "./components/Layout/NavBar";
 import Footer from "./components/Layout/Footer";
@@ -19,8 +19,9 @@ function App() {
   // user api
   const fetchUser = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/user/getuser", { withCredentials: true });
-    dispatch(addUser(response.data.user));
+      const response = await axios.get("/v1/user/getuser", { withCredentials: true });
+      console.log("Rsponse in App"+response)
+    dispatch(addUser(response?.data?.user));
     dispatch(setIsAuthorized(true));
     } catch (error) {
       dispatch(setIsAuthorized(false));
@@ -29,7 +30,7 @@ function App() {
 
   useEffect(()=>{
     fetchUser()
-  },[])
+  },[isAuthorized])
 
   return (
     <>

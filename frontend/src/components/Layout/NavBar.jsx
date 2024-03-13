@@ -18,7 +18,7 @@ import axios from 'axios';
 import { addUser } from '../../Utils/userSlice';
 import { setIsAuthorized } from '../../Utils/isAuthorizedSlice';
 import { Link, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { toast, ToastContainer } from "react-toastify";
 
 
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -50,7 +50,7 @@ const NavBar = () => {
   // user api
   const handleLogout = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/user/logout", { withCredentials: true });
+      const response = await axios.get("/v1/user/logout", { withCredentials: true });
       toast.success(response.data.message);
       dispatch(setIsAuthorized(false));
       navigateTo("/login")
@@ -61,6 +61,8 @@ const NavBar = () => {
   };
 
   return (
+   <>
+    <ToastContainer />
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -226,7 +228,9 @@ const NavBar = () => {
 
         </Toolbar>
       </Container>
+     
     </AppBar>
+   </>
   );
 }
 export default NavBar;

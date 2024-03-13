@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import {toast,ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAuthorized } from "../../Utils/isAuthorizedSlice";
 import { Link, Navigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [successMeg,setSuccessMeg] = useState("");
+
 
   const isAuthorized = useSelector((store) => store.isAuthorized);
   const user = useSelector((store) => store.user);
@@ -25,7 +25,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:4000/api/v1/user/register", {
+      const response = await fetch("/v1/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,16 +33,17 @@ const Register = () => {
 
         body: JSON.stringify({ name: name, phone: phone, email: email, role: role, password: password }),
       });
-     
+
       if (!response.ok) {
-        const errorMessage = await response.json(); 
-        console.log(errorMessage.message) 
+        const errorMessage = await response.json();
+        console.log(errorMessage.message)
         toast.warning(errorMessage.message);
         throw new Error(errorMessage.message);
       }
 
       const data = await response.json();
-      setSuccessMeg(data.message);
+      console.log(data)
+      toast.success(data.message)
       setName("");
       setEmail("");
       setPassword("");
@@ -54,7 +55,10 @@ const Register = () => {
     }
   };
 
-
+  if (isAuthorized) {
+    toast.success("fsfsfsfsfsdfsf")
+  }
+  console.log(isAuthorized)
 
   if (isAuthorized) {
     return <Navigate to={"/"} />;
@@ -83,13 +87,14 @@ const Register = () => {
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Role</label>
                   <select value={role} onChange={(e) => setRole(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                    <option value="">Select Role</option>
                     <option value="Employer">Employer</option>
                     <option value="Job Seeker">Job Seeker</option>
                   </select>
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Phone</label>
-                  <input type="text" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+91 xxxxxxxx" required="" />
+                  <input type="tel" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+91 xxxxxxxx" required="" />
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
@@ -111,7 +116,7 @@ const Register = () => {
           </div>
         </div >
       </section >
-      <ToastContainer   />
+      <ToastContainer />
     </>
   )
 }
