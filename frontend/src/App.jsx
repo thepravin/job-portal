@@ -21,7 +21,7 @@ function App() {
   const fetchUser = async () => {
     try {
       const response = await axios.get("/v1/user/getuser", { withCredentials: true });
-      console.log("Rsponse in App"+response)
+      // console.log("Rsponse in App"+response)
     dispatch(addUser(response?.data?.user));
     dispatch(setIsAuthorized(true));
     } catch (error) {
