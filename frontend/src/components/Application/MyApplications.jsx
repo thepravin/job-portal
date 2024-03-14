@@ -74,7 +74,7 @@ const MyApplications = () => {
 
 
   return (
-    <section className="my_applications page">
+    <section className="my_applications page mt-12">
       {user && user.role === "Job Seeker" ? (
         <div className="container">
           <h1>My Applications</h1>
@@ -117,7 +117,7 @@ const MyApplications = () => {
         </div>
       )}
       {modalOpen && (
-        <ResumeModal imageUrl={resumeImageUrl} onClose={closeModal} />
+        <ResumeModal  imageUrl={resumeImageUrl} onClose={closeModal} />
       )}
     </section>
   );
@@ -185,7 +185,7 @@ const EmployerCard = ({ element, openModal }) => {
             <span>CoverLetter:</span> {element.coverLetter}
           </p>
         </div>
-        <div className="resume">
+        <div className="w-[550px] h-auto">
           <img
             src={element.resume.url}
             alt="resume"

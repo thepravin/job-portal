@@ -14,12 +14,12 @@ const Home = () => {
   }
 
   return (
-    <>
+    <div className="mt-12">
     <HeroSection/>
     <HowItWorks/>
     <PopularCategories/>
     <PopularCompanies/>
-    </>
+    </div>
   )
 }
 

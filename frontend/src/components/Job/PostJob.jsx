@@ -71,7 +71,7 @@ const PostJob = () => {
   }
 
   return (
-    <>
+    <div className="mt-12">
       <div className="job_post page">
         <div className="container">
           <h3 className="text-2xl font-bold">POST NEW JOB</h3>
@@ -179,7 +179,7 @@ const PostJob = () => {
           </form>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

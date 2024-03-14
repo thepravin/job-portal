@@ -61,7 +61,7 @@ const NavBar = () => {
   };
 
   return (
-   <>
+   <div className='fixed w-full top-0 z-12'>
     <ToastContainer />
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -233,7 +233,7 @@ const NavBar = () => {
       </Container>
      
     </AppBar>
-   </>
+   </div>
   );
 }
 export default NavBar;

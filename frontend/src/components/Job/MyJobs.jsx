@@ -89,7 +89,7 @@ const handleUpdateJob = async (jobId) => {
 
   return (
     <>
-      <div className="myJobs page">
+      <div className="myJobs page mt-12">
         <div className="container">
           <h1 className="text-3xl font-bold">Your Posted Jobs</h1>
           {myJobs.length > 0 ? (
