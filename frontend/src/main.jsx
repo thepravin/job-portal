@@ -18,6 +18,7 @@ import NotFound from "./components/NotFound/NotFound";
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './Utils/Store';
+import { ToastContainer } from 'react-toastify';
 
 const appRouter = createBrowserRouter([
   {
@@ -76,6 +77,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
   <Provider store={store}>
     <RouterProvider router={appRouter} />
+    <ToastContainer/>
   </Provider>
 
 )

@@ -134,7 +134,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
             <span>Address:</span> {element.address}
           </p>
           <p>
-            <span>CoverLetter:</span> {element.coverLetter}
+            <span>jobTitle:</span> {element.jobTitle}
           </p>
         </div>
         <div className="w-[550px] h-auto object-cover">
@@ -172,7 +172,7 @@ const EmployerCard = ({ element, openModal }) => {
             <span>Address:</span> {element.address}
           </p>
           <p>
-            <span>CoverLetter:</span> {element.coverLetter}
+            <span>jobTitle:</span> {element.jobTitle}
           </p>
         </div>
         <div className="w-[550px]  h-auto">

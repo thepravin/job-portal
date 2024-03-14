@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-
+import { toast, ToastContainer } from "react-toastify";
 
 const Jobs = () => {
   const isAuthorized = useSelector((store) => store.isAuthorized);
@@ -31,6 +31,7 @@ if(!isAuthorized){
 
   return (
     <>
+    <ToastContainer/>
      <section className="jobs page">
       <div className="container">
         <h1>ALL AVAILABLE JOBS</h1>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -7,14 +7,23 @@ import { toast, ToastContainer } from "react-toastify";
 const Application = () => {
   const isAuthorized = useSelector((store) => store.isAuthorized);
   const user = useSelector((store) => store.user);
-  const {id} = useParams();
+  const { id } = useParams();
   const navigateTo = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [coverLetter, setCoverLetter] = useState("");
+  const [jobTitle, setjobTitle] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [resume, setResume] = useState(null);
+
+
+
+  const fetchJob = async () => {
+    const res = await axios.get(`/v1/job/${id}`, { withCredentials: true });
+    setjobTitle(res.data.job.title)
+
+  };
+  useEffect(() => { fetchJob() }, [])
 
 
   // Function to handle file input changes
@@ -30,7 +39,7 @@ const Application = () => {
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("address", address);
-    formData.append("coverLetter", coverLetter);
+    formData.append("jobTitle", jobTitle);
     formData.append("resume", resume);
     formData.append("jobId", id);
 
@@ -47,7 +56,7 @@ const Application = () => {
       );
       setName("");
       setEmail("");
-      setCoverLetter("");
+      setjobTitle("");
       setPhone("");
       setAddress("");
       setResume("");
@@ -64,6 +73,8 @@ const Application = () => {
 
 
   return (
+   <>
+   <ToastContainer/>
     <section className="application">
       <div className="container">
         <h3 className="mt-12 font-bold text-2xl">Application Form</h3>
@@ -92,13 +103,18 @@ const Application = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
-          <textarea
-            placeholder="CoverLetter..."
-            value={coverLetter}
-            onChange={(e) => setCoverLetter(e.target.value)}
+
+          <input
+            type="text"
+            placeholder="Your Address"
+            value={jobTitle}
           />
+
+
+
+
           <div>
-            <label
+            <label className="text-gray-500"
               style={{ textAlign: "start", display: "block", fontSize: "20px" }}
             >
               Select Resume
@@ -114,6 +130,7 @@ const Application = () => {
         </form>
       </div>
     </section>
+   </>
   );
 }
 

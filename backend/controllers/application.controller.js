@@ -85,7 +85,7 @@ const postApplication = catchAsyncError(async (req, res, next) => {
     return next(new ErrorHandler("Falied to upload Resume to cloudinary", 500));
   }
 
-  const { name, email, coverLetter, phone, address, jobId } = req.body;
+  const { name, email, jobTitle, phone, address, jobId } = req.body;
   const applicantID = {
     user: req.user._id,
     role: "Job Seeker",
@@ -105,7 +105,7 @@ const postApplication = catchAsyncError(async (req, res, next) => {
   if (
     !name ||
     !email ||
-    !coverLetter ||
+    !jobTitle ||
     !phone ||
     !address ||
     !applicantID ||
@@ -117,7 +117,7 @@ const postApplication = catchAsyncError(async (req, res, next) => {
   const application = await Application.create({
     name,
     email,
-    coverLetter,
+    jobTitle,
     phone,
     address,
     applicantID,

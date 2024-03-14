@@ -38,7 +38,7 @@ function App() {
       <NavBar />
       <Outlet />
       {/* <Footer /> */}
-     
+      <ToastContainer/>
     </>
   );
 }

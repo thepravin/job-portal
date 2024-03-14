@@ -4,6 +4,7 @@ import HeroSection from "./HeroSection";
 import HowItWorks from "./HowItWorks";
 import PopularCategories from "./PopularCategories";
 import PopularCompanies from "./PopularCompanies";
+import { ToastContainer } from "react-toastify";
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
 
   return (
     <div className="mt-12">
+     <ToastContainer/>
     <HeroSection/>
     <HowItWorks/>
     <PopularCategories/>
