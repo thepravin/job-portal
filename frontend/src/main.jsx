@@ -41,7 +41,8 @@ const appRouter = createBrowserRouter([
       {
         path: "/application/:id",
         element: <Application />
-      }, {
+      },
+       {
         path: "/applications/me",
         element: <MyApplications />
       },

@@ -211,14 +211,14 @@ const NavBar = () => {
             >
 
               <MenuItem onClick={handleCloseUserMenu}>
-                <Link to={"/application/me"}>
                   <Typography textAlign="center" >
+                <Link to={"/applications/me"}>
                     {
                       user && user.role === "Employer" ? "APPLICATIONS" : "MY APPLICATIONS"
                     }
 
-                  </Typography>
                 </Link>
+                  </Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography textAlign="center" onClick={handleLogout}>Logout</Typography>
