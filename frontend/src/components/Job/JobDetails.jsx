@@ -38,10 +38,10 @@ const JobDetails = () => {
   console.log(job);
 
   return job ? (
-    <section className="jobDetail page">
+    <section className="jobDetail page mt-12">
       <div className="container">
         <h1 className="font-bold text-2xl">Job Details</h1>
-        <div className="banner">
+        <div className="banner -mt-20">
           <p>
             Title: <span>{job.title}</span>
           </p>

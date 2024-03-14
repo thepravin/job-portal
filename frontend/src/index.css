@@ -810,7 +810,7 @@
   /* my application end */
 
   /* resume model */
-  /* .resume-modal {
+   .resume-modal {
     width: 100%;
     display: flex;
     background: #00000085;
@@ -846,5 +846,5 @@
       z-index: 11;
     }
   }
-   */
+   
   /* resume model end */

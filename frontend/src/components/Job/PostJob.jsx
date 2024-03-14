@@ -18,6 +18,7 @@ const PostJob = () => {
 
   const isAuthorized = useSelector((store) => store.isAuthorized);
   const user = useSelector((store) => store.user);
+  const navigateTo = useNavigate()
 
   const handleJobPost = async (e) => {
     e.preventDefault();
@@ -59,13 +60,14 @@ const PostJob = () => {
     )
       .then((res) => {
         toast.success(res.data.message);
+        navigateTo("/job/me")
       })
       .catch((err) => {
         toast.error(err.response.data.message);
       });
   }
 
-  const navigateTo = useNavigate()
+ 
   if (!isAuthorized || (user && user.role !== 'Employer')) {
     navigateTo("/")
   }
@@ -169,8 +171,7 @@ const PostJob = () => {
                 )}
               </div>
             </div>
-            <textarea
-              rows="5"
+            <textarea             
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Job Description"

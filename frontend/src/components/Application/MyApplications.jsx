@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import axios from "axios";
- 
 import { useNavigate } from "react-router-dom";
 import ResumeModal from "./ResumeModal";
 import { useSelector } from "react-redux";
@@ -10,10 +9,9 @@ const MyApplications = () => {
   const isAuthorized = useSelector((store) => store.isAuthorized);
   const user = useSelector((store) => store.user);
   const [applications, setApplications] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
   const [resumeImageUrl, setResumeImageUrl] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const navigateTo = useNavigate();
-
 
   useEffect(() => {
     try {
@@ -31,7 +29,6 @@ const MyApplications = () => {
             withCredentials: true,
           })
           .then((res) => {
-            console.log(res)
             setApplications(res.data.applications);
           });
       }
@@ -70,17 +67,13 @@ const MyApplications = () => {
     setModalOpen(false);
   };
 
-
-
-
   return (
     <section className="my_applications page mt-12">
       {user && user.role === "Job Seeker" ? (
         <div className="container">
-          <h1>My Applications</h1>
+          <h1 className="text-center font-bold text-2xl">My Applications</h1>
           {applications.length <= 0 ? (
             <>
-            
               <h4>No Applications Found</h4>{" "}
             </>
           ) : (
@@ -123,9 +116,6 @@ const MyApplications = () => {
   );
 }
 
-export default MyApplications
-
-
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
     <>
@@ -147,7 +137,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
             <span>CoverLetter:</span> {element.coverLetter}
           </p>
         </div>
-        <div className="resume">
+        <div className="w-[550px] h-auto object-cover">
           <img
             src={element.resume.url}
             alt="resume"
@@ -185,7 +175,7 @@ const EmployerCard = ({ element, openModal }) => {
             <span>CoverLetter:</span> {element.coverLetter}
           </p>
         </div>
-        <div className="w-[550px] h-auto">
+        <div className="w-[550px]  h-auto">
           <img
             src={element.resume.url}
             alt="resume"
@@ -196,3 +186,5 @@ const EmployerCard = ({ element, openModal }) => {
     </>
   );
 };
+
+export default MyApplications;
