@@ -51,7 +51,7 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get("/v1/user/logout", { withCredentials: true });
-      toast.success(response.data.message);
+      toast.success("Logout Successfull");
       dispatch(setIsAuthorized(false));
       navigateTo("/login")
     } catch (error) {
@@ -62,7 +62,7 @@ const NavBar = () => {
 
   return (
    <div className='fixed w-full top-0 z-12'>
-    <ToastContainer />
+   
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>

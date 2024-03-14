@@ -116,7 +116,7 @@ const Register = () => {
           </div>
         </div >
       </section >
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   )
 }
