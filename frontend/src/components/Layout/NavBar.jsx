@@ -178,10 +178,13 @@ const NavBar = () => {
             + New Job
           </Button>
            </Link>
-          </>):(<>
-            <Button variant="contained" sx={{mr:2, backgroundColor:"lightskyblue"}}>
+           <Link to={"/job/me"}>
+           <Button variant="contained" sx={{mr:2, backgroundColor:"lightskyblue"}}>
            VIEW YOUR JOBS
           </Button>
+           </Link>
+          </>):(<>
+            
           </>)
         }
           <Box sx={{ flexGrow: 0 }}>
@@ -211,7 +214,7 @@ const NavBar = () => {
                 <Link to={"/application/me"}>
                   <Typography textAlign="center" >
                     {
-                      user && user.role === "Employer" ? "APPLICANT'S APPLICATIONS" : "MY APPLICATIONS"
+                      user && user.role === "Employer" ? "APPLICATIONS" : "MY APPLICATIONS"
                     }
 
                   </Typography>
