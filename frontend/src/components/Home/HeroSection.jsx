@@ -1,5 +1,6 @@
 
 import { FaBuilding, FaSuitcase, FaUsers, FaUserPlus } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
 
 const HeroSection = () => {
   const details = [
@@ -30,6 +31,7 @@ const HeroSection = () => {
   ];
   return (
     <div className="">
+      
       <div className="flex items-center">
         <div className="ml-4">
           <h1 className="text-5xl font-bold">Find a Job that suits</h1>

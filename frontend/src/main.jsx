@@ -76,8 +76,10 @@ const appRouter = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   <Provider store={store}>
-    <RouterProvider router={appRouter} />
+   
     <ToastContainer/>
+    <RouterProvider router={appRouter} />
+   
   </Provider>
 
 )

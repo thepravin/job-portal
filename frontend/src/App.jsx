@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { setIsAuthorized } from "./Utils/isAuthorizedSlice";
 import { addUser } from "./Utils/userSlice";
 import { ToastContainer } from "react-toastify";
-
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const isAuthorized = useSelector((store) => store.isAuthorized);
   const user = useSelector((store) => store.user);
@@ -35,10 +35,11 @@ function App() {
 
   return (
     <>
+    <ToastContainer/>
       <NavBar />
       <Outlet />
       {/* <Footer /> */}
-      <ToastContainer/>
+      
     </>
   );
 }

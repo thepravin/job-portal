@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -35,9 +36,11 @@ const JobDetails = () => {
     return navigateTo("/login");
   }
 
-  console.log(job);
+
 
   return job ? (
+    <>
+    <ToastContainer/>
     <section className="jobDetail page mt-12">
       <div className="container">
         <h1 className="font-bold text-2xl">Job Details</h1>
@@ -81,6 +84,7 @@ const JobDetails = () => {
         </div>
       </div>
     </section>
+    </>
   ) : null;
 };
 

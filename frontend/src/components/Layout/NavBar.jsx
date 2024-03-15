@@ -61,179 +61,182 @@ const NavBar = () => {
   };
 
   return (
-   <div className='fixed w-full top-0 z-12'>
-   
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          {/* header in normal view */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: '',
-              fontWeight: 700,
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
+   <>
+    {/* <ToastContainer/> */}
+   <div className='fixed w-full top-0 z-12'>   
+   <AppBar position="static">
+     <Container maxWidth="xl">
+       <Toolbar disableGutters>
+         {/* header in normal view */}
+         <Typography
+           variant="h6"
+           noWrap
+           component="a"
+           href="#app-bar-with-responsive-menu"
+           sx={{
+             mr: 2,
+             display: { xs: 'none', md: 'flex' },
+             fontFamily: '',
+             fontWeight: 700,
+             color: 'inherit',
+             textDecoration: 'none',
+           }}
+         >
+         KΛM धंदा
+         </Typography>
+
+         {/* mobile view menu */}
+         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }} >
+           <IconButton
+             size="large"
+             aria-label="account of current user"
+             aria-controls="menu-appbar"
+             aria-haspopup="true"
+             onClick={handleOpenNavMenu}
+             color="inherit"
+           >
+             <MenuIcon />
+           </IconButton>
+           <Menu
+             id="menu-appbar"
+             anchorEl={anchorElNav}
+             anchorOrigin={{
+               vertical: 'bottom',
+               horizontal: 'left',
+             }}
+             keepMounted
+             transformOrigin={{
+               vertical: 'top',
+               horizontal: 'left',
+             }}
+             open={Boolean(anchorElNav)}
+             onClose={handleCloseNavMenu}
+             sx={{
+               display: { xs: 'block', md: 'none' },
+             }}
+           >
+
+             <MenuItem onClick={handleCloseNavMenu}>
+               <Link to={"/"}><Typography textAlign="center">Home</Typography> </Link>             
+             </MenuItem>
+             <MenuItem onClick={handleCloseNavMenu}>
+               <Link to={"/job/getall"}><Typography textAlign="center">All Jobs</Typography> </Link>             
+                          
+             </MenuItem>
+
+           </Menu>
+         </Box>
+
+
+         {/* header in mobile view */}
+         <Typography
+           variant="h5"
+           noWrap
+           component="a"
+           href="#app-bar-with-responsive-menu"
+           sx={{
+             mr: 2,
+             display: { xs: 'flex', md: 'none' },
+             flexGrow: 1,
+             fontFamily: '',
+             fontWeight: 700,
+             color: 'inherit',
+             textDecoration: 'none',
+           }}
+         >
           KΛM धंदा
-          </Typography>
-
-          {/* mobile view menu */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Home</Typography>
-                <Typography textAlign="center">Home</Typography>
-                <Typography textAlign="center">Home</Typography>
-                <Typography textAlign="center">Home</Typography>
-              </MenuItem>
-
-            </Menu>
-          </Box>
+         </Typography>
 
 
-          {/* header in mobile view */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: '',
-              fontWeight: 700,
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-           KΛM धंदा
-          </Typography>
+         {/* desktop menu list */}
+         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 
-
-          {/* desktop menu list */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
-            <Link to={"/"}>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Home
-              </Button>
-            </Link>
-            <Link to={"/job/getall"}>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                All Jobs
-              </Button>
-            </Link>
-
-
-
-          </Box>
-
-          {/* user */}
-        {
-          user && user.role === "Employer" ? (<>
-           <Link to={"/job/post"}>
-           <Button variant="contained" sx={{mr:2, backgroundColor:"lightskyblue"}}>
-            + New Job
-          </Button>
+           <Link to={"/"}>
+             <Button
+               onClick={handleCloseNavMenu}
+               sx={{ my: 2, color: 'white', display: 'block' }}
+             >
+               Home
+             </Button>
            </Link>
-           <Link to={"/job/me"}>
-           <Button variant="contained" sx={{mr:2, backgroundColor:"lightskyblue"}}>
-           VIEW YOUR JOBS
-          </Button>
+           <Link to={"/job/getall"}>
+             <Button
+               onClick={handleCloseNavMenu}
+               sx={{ my: 2, color: 'white', display: 'block' }}
+             >
+               All Jobs
+             </Button>
            </Link>
-          </>):(<>
-            
-          </>)
-        }
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-
-              <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" >
-                <Link to={"/applications/me"}>
-                    {
-                      user && user.role === "Employer" ? "APPLICATIONS" : "MY APPLICATIONS"
-                    }
-
-                </Link>
-                  </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center" onClick={handleLogout}>Logout</Typography>
-              </MenuItem>
 
 
-            </Menu>
-          </Box>
+
+         </Box>
+
+         {/* user */}
+       {
+         user && user.role === "Employer" ? (<>
+          <Link to={"/job/post"}>
+          <Button variant="contained" sx={{mr:2, backgroundColor:"lightskyblue"}}>
+           + New Job
+         </Button>
+          </Link>
+          <Link to={"/job/me"}>
+          <Button variant="contained" sx={{mr:2, backgroundColor:"lightskyblue"}}>
+          VIEW YOUR JOBS
+         </Button>
+          </Link>
+         </>):(<>
+           
+         </>)
+       }
+         <Box sx={{ flexGrow: 0 }}>
+           <Tooltip title="Open settings">
+             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+               <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+             </IconButton>
+           </Tooltip>
+           <Menu
+             sx={{ mt: '45px' }}
+             id="menu-appbar"
+             anchorEl={anchorElUser}
+             anchorOrigin={{
+               vertical: 'top',
+               horizontal: 'right',
+             }}
+             keepMounted
+             transformOrigin={{
+               vertical: 'top',
+               horizontal: 'right',
+             }}
+             open={Boolean(anchorElUser)}
+             onClose={handleCloseUserMenu}
+           >
+
+             <MenuItem onClick={handleCloseUserMenu}>
+                 <Typography textAlign="center" >
+               <Link to={"/applications/me"}>
+                   {
+                     user && user.role === "Employer" ? "APPLICATIONS" : "MY APPLICATIONS"
+                   }
+
+               </Link>
+                 </Typography>
+             </MenuItem>
+             <MenuItem onClick={handleCloseUserMenu}>
+               <Typography textAlign="center" onClick={handleLogout}>Logout</Typography>
+             </MenuItem>
 
 
-        </Toolbar>
-      </Container>
-     
-    </AppBar>
-   </div>
+           </Menu>
+         </Box>
+
+
+       </Toolbar>
+     </Container>
+    
+   </AppBar>
+  </div>
+   </>
   );
 }
 export default NavBar;

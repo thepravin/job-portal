@@ -18,12 +18,19 @@ const Application = () => {
 
 
 
+
+
   const fetchJob = async () => {
     const res = await axios.get(`/v1/job/${id}`, { withCredentials: true });
     setjobTitle(res.data.job.title)
 
   };
-  useEffect(() => { fetchJob() }, [])
+  useEffect(() => {
+    fetchJob()
+    setName(user.name);
+    setEmail(user.email);
+    setPhone(user.phone);
+  }, [])
 
 
   // Function to handle file input changes
@@ -73,64 +80,65 @@ const Application = () => {
 
 
   return (
-   <>
-   <ToastContainer/>
-    <section className="application">
-      <div className="container">
-        <h3 className="mt-12 font-bold text-2xl">Application Form</h3>
-        <form onSubmit={handleApplication} >
-          <input
-            type="text"
-            placeholder="Your Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Your Phone Number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Your Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-
-          <input
-            type="text"
-            placeholder="Your Address"
-            value={jobTitle}
-          />
-
-
-
-
-          <div>
-            <label className="text-gray-500"
-              style={{ textAlign: "start", display: "block", fontSize: "20px" }}
-            >
-              Select Resume
-            </label>
+    <>
+  
+      <section className="application">
+        <div className="container">
+          <h3 className="mt-12 font-bold text-2xl">Application Form</h3>
+          <form onSubmit={handleApplication} >
             <input
-              type="file"
-              accept=".pdf, .jpg, .png"
-              onChange={handleFileChange}
-              style={{ width: "100%" }}
+              type="text"
+              placeholder="Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-          </div>
-          <button type="submit">Send Application</button>
-        </form>
-      </div>
-    </section>
-   </>
+            <input
+              type="email"
+              placeholder="Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Your Phone Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Your Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+
+            <input
+              type="text"
+              placeholder="Your Address"
+              value={jobTitle}
+            />
+
+
+
+
+            <div>
+              <label className="text-gray-500"
+                style={{ textAlign: "start", display: "block", fontSize: "20px" }}
+              >
+                Select Resume
+              </label>
+              <input
+                type="file"
+                accept=".pdf, .jpg, .png"
+                onChange={handleFileChange}
+                style={{ width: "100%" }}
+              />
+            </div>
+            <button type="submit">Send Application</button>
+          </form>
+        </div>
+      </section>
+      
+    </>
   );
 }
 
