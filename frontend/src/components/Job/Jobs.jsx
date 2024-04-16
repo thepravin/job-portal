@@ -32,24 +32,48 @@ if(!isAuthorized){
   return (
     <>
     <ToastContainer/>
-     <section className="jobs page">
-      <div className="container">
-        <h1>ALL AVAILABLE JOBS</h1>
-        <div className="banner">
-          {job &&
-            job.map((element) => {
-              return (
-                <div className="card" key={element._id}>
-                  <p>{element.title}</p>
-                  <p>{element.category}</p>
-                  <p>{element.country}</p>
-                  <Link to={`/job/${element._id}`}>Job Details</Link>
-                </div>
-              );
-            })}
-        </div>
-      </div>
-    </section>
+    <section className="jobs page mt-12">
+  <div className="container">
+    <h1 className="text-2xl font-bold ">ALL AVAILABLE JOBS</h1>
+    <div className="banner">
+      {job &&
+        job.map((element) => {
+          // Check if 'skills' property exists and is not undefined
+          const skillsArray = element.skills ? element.skills.split(',') : [];
+
+          return (
+            <div
+              className="card bg-white rounded-lg shadow-md p-4 mb-4"
+              key={element._id}
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              <p className="font-semibold text-lg mb-2">{element.title}</p>
+              <p className="text-gray-600 mb-2">{element.category}</p>
+              {/* Map each skill to a separate circular element */}
+              <div style={{ display: "flex", flexWrap: "wrap" }}>
+                {skillsArray.map((skill, index) => (
+                  <div
+                    key={index}
+                    className="mr-2 mb-2 rounded-full bg-blue-500 text-white px-2 py-1"
+                    style={{ minWidth: "fit-content" }}
+                  >
+                    {skill.trim()}
+                  </div>
+                ))}
+              </div>
+              <Link
+                to={`/job/${element._id}`}
+                className="text-blue-500 hover:underline mt-2 inline-block"
+              >
+                Job Details
+              </Link>
+            </div>
+          );
+        })}
+    </div>
+  </div>
+</section>
+
     
     </>
   )
