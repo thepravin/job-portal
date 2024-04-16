@@ -306,6 +306,24 @@ const handleUpdateJob = async (jobId) => {
                             }
                           />
                         </div>
+
+                        <div>
+                          <span> Required Skills : </span>
+                          <textarea
+                            value={element.skills}
+                            rows={5}
+                            disabled={
+                              editingMode !== element._id ? true : false
+                            }
+                            onChange={(e) =>
+                              handleInputChange(
+                                element._id,
+                                "skills",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
                     {/* Out Of Content Class */}

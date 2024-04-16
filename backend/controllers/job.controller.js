@@ -19,6 +19,7 @@ const postJob = catchAsyncError(async (req, res, next) => {
   }
   const {
     title,
+    skills,
     description,
     category,
     country,
@@ -50,6 +51,7 @@ const postJob = catchAsyncError(async (req, res, next) => {
   const postedBy = req.user._id;
   const job = await Job.create({
     title,
+    skills,
     description,
     category,
     country,

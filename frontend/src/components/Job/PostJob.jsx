@@ -10,6 +10,7 @@ const PostJob = () => {
   const [category, setCategory] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
+  const [skills, setSkills] = useState("");
   const [location, setLocation] = useState("");
   const [salaryFrom, setSalaryFrom] = useState("");
   const [salaryTo, setSalaryTo] = useState("");
@@ -35,6 +36,7 @@ const PostJob = () => {
     await axios.post("/v1/job/post",
       fixedSalary.length >= 4 ? {
         title,
+        skills,
         description,
         category,
         country,
@@ -43,6 +45,7 @@ const PostJob = () => {
         fixedSalary,
       } : {
         title,
+        skills,
         description,
         category,
         country,
@@ -133,6 +136,12 @@ const PostJob = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
+            />
+            <input
+              type="text"
+              value={skills}
+              onChange={(e) => setSkills(e.target.value)}
+              placeholder="Skills"
             />
             <div className="salary_wrapper">
               <select

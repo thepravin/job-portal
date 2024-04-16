@@ -52,6 +52,9 @@ const JobDetails = () => {
             Category: <span>{job.category}</span>
           </p>
           <p>
+            Required Skills : <span>{job.skills}</span>
+          </p>
+          <p>
             Country: <span>{job.country}</span>
           </p>
           <p>
