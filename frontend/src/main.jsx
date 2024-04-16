@@ -19,6 +19,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './Utils/Store';
 import { ToastContainer } from 'react-toastify';
+import Profile from './components/Layout/Profile';
 
 const appRouter = createBrowserRouter([
   {
@@ -54,6 +55,9 @@ const appRouter = createBrowserRouter([
       {
         path: "/job/me",
         element: <MyJobs />
+      },{
+        path: "/profile",
+        element: <Profile/>
       }, {
         path: "*",
         element: <NotFound />
