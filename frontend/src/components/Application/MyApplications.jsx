@@ -5,6 +5,34 @@ import { useNavigate } from "react-router-dom";
 import ResumeModal from "./ResumeModal";
 import { useSelector } from "react-redux";
 
+const applicationAccept = async (id) => {
+  try {
+    await axios
+      .put(`/v1/application/status/approve/${id}`, {}, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success(res.data.message);
+      });
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+}
+const applicationRejected = async (id) => {
+  try {
+    await axios
+      .put(`/v1/application/status/rejected/${id}`, {}, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success(res.data.message);
+      });
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+}
+
+
 const MyApplications = () => {
   const isAuthorized = useSelector((store) => store.isAuthorized);
   const user = useSelector((store) => store.user);
@@ -67,6 +95,10 @@ const MyApplications = () => {
     setModalOpen(false);
   };
 
+
+
+
+
   return (
     <section className="my_applications page mt-12">
       {user && user.role === "Job Seeker" ? (
@@ -110,7 +142,7 @@ const MyApplications = () => {
         </div>
       )}
       {modalOpen && (
-        <ResumeModal  imageUrl={resumeImageUrl} onClose={closeModal} />
+        <ResumeModal imageUrl={resumeImageUrl} onClose={closeModal} />
       )}
     </section>
   );
@@ -135,6 +167,10 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
           </p>
           <p>
             <span>jobTitle:</span> {element.jobTitle}
+          </p>
+          <p>
+            <span>Job Status :</span> {element.employerID.status == "Accepted" ? <span className="text-green-500">Accepted</span> : <span className="text-red-500">Rejected</span>}
+
           </p>
         </div>
         <div className="w-[550px] h-auto object-cover">
@@ -174,8 +210,39 @@ const EmployerCard = ({ element, openModal }) => {
           <p>
             <span>jobTitle:</span> {element.jobTitle}
           </p>
+
+          {/* Buttons to update application status */}
+          <div className="mt-4">
+            {
+              element.employerID.status === "Accepted" ? (
+
+                <button className="bg-red-600 mr-4 px-5 py-2 text-white rounded-lg" onClick={() => applicationRejected(element._id)}>
+                  Reject
+                </button>
+
+              ) : element.employerID.status === "Rejected" ? (
+                <button className="bg-green-600 mr-4 px-5 py-2 text-white rounded-lg" onClick={() => applicationAccept(element._id)}>
+                  Accept
+                </button>
+              ) : (
+                <>
+                  <button className="bg-green-600 mr-4 px-5 py-2 text-white rounded-lg" onClick={() => applicationAccept(element._id)}>
+                    Accept
+                  </button>
+                  <button className="bg-red-600 mr-4 px-5 py-2 text-white rounded-lg" onClick={() => applicationRejected(element._id)}>
+                    Reject
+                  </button>
+                </>
+              )
+            }
+          </div>
+            
         </div>
-        <div className="w-[550px]  h-auto">
+        <p className="mr-44 ">
+        {element.employerID.status == "Accepted" ? <span className="text-green-500 text-3xl font-bold"> ✅Accepted</span> : <span className="text-red-500 text-3xl font-bold">❌Rejected</span>}
+         
+        </p>
+        <div className="w-[550px]  h-auto">          
           <img
             src={element.resume.url}
             alt="resume"

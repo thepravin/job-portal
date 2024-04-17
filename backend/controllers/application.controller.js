@@ -134,9 +134,57 @@ const postApplication = catchAsyncError(async (req, res, next) => {
   });
 });
 
+const acceptApplication = async (req, res) => {
+  try {
+    const applicationId = req.params.id;
+
+    // Find the application by ID
+    const application = await Application.findById(applicationId);
+
+    if (!application) {
+      return res.status(404).json({ error: "Application not found" });
+    }
+
+    // Update the status
+    application.employerID.status = "Accepted";
+    await application.save();
+    console.log(application.employerID.status)
+    res
+      .status(200)
+      .json({ message: "Status updated successfully", application });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const rejectedApplication = async (req, res) => {
+  try {
+    const applicationId = req.params.id;
+
+    // Find the application by ID
+    const application = await Application.findById(applicationId);
+
+    if (!application) {
+      return res.status(404).json({ error: "Application not found" });
+    }
+
+    // Update the status
+    application.employerID.status = "Rejected";
+    await application.save();
+
+    res
+      .status(200)
+      .json({ message: "Status updated successfully", application });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   employerGetAllApplications,
   jobSeekerDeleteApplication,
   jobSeekerGetAllApplications,
   postApplication,
+  acceptApplication,
+  rejectedApplication
 };

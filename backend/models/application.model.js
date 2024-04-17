@@ -58,6 +58,11 @@ const applicationSchema = new mongoose.Schema({
       enum: ["Employer"],
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["Under Process", "Accepted", "Rejected"],
+      default: "under process",
+    },
   },
 });
 
