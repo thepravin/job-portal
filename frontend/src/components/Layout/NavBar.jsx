@@ -126,7 +126,9 @@ const NavBar = () => {
                   </MenuItem>
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Link to={"/job/getall"}><Typography textAlign="center">All Jobs</Typography> </Link>
-
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Link to={"/news"}><Typography textAlign="center">News</Typography> </Link>
                   </MenuItem>
 
                 </Menu>
@@ -164,12 +166,22 @@ const NavBar = () => {
                     Home
                   </Button>
                 </Link>
+
                 <Link to={"/job/getall"}>
                   <Button
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     All Jobs
+                  </Button>
+                </Link>
+
+                <Link to={"/news"}>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    News
                   </Button>
                 </Link>
 

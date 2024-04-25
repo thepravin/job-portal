@@ -20,6 +20,7 @@ import { Provider } from 'react-redux';
 import store from './Utils/Store';
 import { ToastContainer } from 'react-toastify';
 import Profile from './components/Layout/Profile';
+import News from './components/Other/News';
 
 const appRouter = createBrowserRouter([
   {
@@ -33,6 +34,11 @@ const appRouter = createBrowserRouter([
       {
         path: "/job/getall",
         element: <Jobs />,
+        children: [],
+      },
+      {
+        path: "/news",
+        element: <News />,
         children: [],
       },
       {
