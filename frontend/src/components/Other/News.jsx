@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
 import NewsItem from "./NewsItem";
+import NewsSimmerCard from "../ShimmerUI/NewsSimmerCard";
 
 const News = () => {
 
-    const [newsData, setNewsData] = useState([]);
+    const [newsData, setNewsData] = useState(null);
 
     const fetchNewsData = async () => {
         try {
@@ -24,14 +25,15 @@ const News = () => {
 
     return (
         <div className="mt-24 flex flex-wrap gap-8 ml-16">
-        {
-          newsData && newsData.map((news, index) => ( 
-            (news.author !== null && news.urlToImage !== null) ? <NewsItem key={index} data={news} /> : ""
-          ))
-        }
-      </div>
-      
-    )
+            {newsData !== null ? (
+                newsData.map((news, index) => (
+                    (news.author !== null && news.urlToImage !== null) ? <NewsItem key={index} data={news} /> : ""
+                ))
+            ) : (
+                <NewsSimmerCard />
+            )}
+        </div>
+    );
 }
 
 export default News
